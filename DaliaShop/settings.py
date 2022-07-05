@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-)#203)e8f%7%q!8g25%3y$l^*^24-(bj+59=##^((xjofrjrmt
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+#sesion cookie
+SESSION_COCKIE = 86400 # this is how long the cart will be stored in the session and outomaticly deleted after 24 hours
+CART_SESSION_ID = 'cart' # this is the name of the session variable that will be used to store the cart to separate from the user session
 
 # Application definition
 
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'product',
+    'cart',
 ]
 
 MIDDLEWARE = [
@@ -64,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart' #adding created context_processors file 
             ],
         },
     },
