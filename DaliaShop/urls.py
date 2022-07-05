@@ -17,14 +17,18 @@ from django.contrib import admin
 from django.urls import path
 
 #DaliaShop
-from core.views import frontpage, shop
+from django.conf.urls.static import static
+from django.conf import settings
+from core.views import frontpage, shop,signup,login
 from product.views import product
 from cart.views import add_to_cart 
 
 urlpatterns = [
     path('', frontpage, name='frontpage'),
+    path('login/', login, name='login'),
+    path('singup/', signup, name='signup'),
     path('shop/', shop, name='shop'),
     path('shop/<slug:slug>/', product, name='product'), #<slug:slug> is the slug of the product to be loaded after clicking on the product / dinamic url
     path ('add_to_cart/<int:product_id>/', add_to_cart, name='add_to_cart'), 
     path('admin/', admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -2,19 +2,28 @@
 
 <div class="max-w-5xl mx-auto flex flex-wrap py-6 px-6 xl:px-0">
   <div class="images w-full mb-6 lg:mb-0 lg:w-3/5">
-    <img class="rounded-xl"
-      src="https://images.unsplash.com/photo-1473188588951-666fce8e7c68?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG200by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1874&q=80 "
-    />
+    <img
+      class="rounded-xl"
+      src="{{product.image.url}}"
   </div>
   <div class="information w-full lg:w-2/5 lg:p-6">
     <h4 class="text-2 my-2">{{product.name}}</h4>
     <p class="text-gray-400 my-2">{{product.get_display_price}}</p>
     {% if product.description %}
-    <p class="text-sm text-gray-600 my-2">
-      {{product.description}}
-    </p>
+    <p class="text-sm text-gray-600 my-2">{{product.description}}</p>
     {% endif %}
-    <a href="" class="mt-6 inline-block px-8 py-4 rounded-xl bg-gray-100 text-black hover:bg-yellow-100 " >add to cart </a>
+    <!-- The hx-get sending "funtion" request to urls.py
+    hx-target  -->
+    <a
+      href="#"
+      class="mt-6 inline-block px-8 py-4 rounded-xl bg-gray-100 text-black hover:bg-yellow-100"
+      
+      hx-get="{% url 'add_to_cart' product.id %}"
+      hx-target="#menu-cart-button"
+      hx-swap="outerHTML"
+    >
+      add to cart
+    </a>
   </div>
 </div>
 

@@ -6,11 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
-<body>
+<body class="flex flex-col min-h-screen font-['Helvetica Neue'] " >
     <!-- nav  -->
     <!-- needs to fix dalia div -->
     
-<nav class = "border-b border - gray -300">
+<nav class = "border-b bg-gray-50 sticky top-0">
     <div class="max-w-7xl flex mx-auto py-2 mt-8 px-1 xl:px-0 flex items-center justify-start  ">
                 <div class="menu flex-1 flex justify-center mr-auto ">
                     <a href= "/"  class = "py-1 text-gray-700 font-semibold text-4xl  "> DALI<a/>
@@ -46,20 +46,20 @@
                 {%endblock%}
                 </main>
                 <!-- footer  -->
-   <footer class="bg-gray-100">
-            <div class="max-w-6xl mx-auto py-10 px-6 xl:px-0 md:flex justify-between">
+   <footer class="bg-gray-50 mt-auto">
+            <div class="max-w-6xl mx-auto py-10 px-6 xl:px-0 md:flex justify-between text-xs">
                 <div class="footer-left mb-12 md:mb-0">
-                    <h2 class="mb-5 uppercase text-lg">About us</h2>
+                    <h4 class="mb-5 uppercase text-lg">about</h4>
 
-                    <p class="text-gray-700">Lorem ipsum bla bla bla..</p>
+                    <p class="text-gray-700">place for text.</p>
                 </div>
 
                 <div class="footer-right">
-                    <h2 class="mb-3 lowercaase text-lg">social links</h2>
+                    <h2 class="mb-3 lowercaase text-lg">sl</h2>
 
                     <ul class="space-y-2">
                     
-                       <li><a href="#" class="text-black hover:text-gray-400">Instagram</a></li>
+                       <li><a href="https://en.wikipedia.org/wiki/Salvador_Dal%C3%AD" class="text-black text-xs hover:text-gray-400">Instagram</a></li>
                     </ul>
                 </div>
             </div>
@@ -69,3 +69,10 @@
 </body>
 
 </html>
+
+
+
+
+<!--too keep footer at the bottom  
+<body class="flex flex-col min-h-screen">
+<footer class="mt-auto"> -->

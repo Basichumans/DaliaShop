@@ -1,6 +1,9 @@
 
 from unicodedata import category, name
 from django.db import models
+from PIL import Image
+from io import BytesIO
+from django.core.files import File
 
 # Create your models here.
 class Category(models.Model):
@@ -21,6 +24,8 @@ class Product(models.Model):
     description = models.TextField(blank=True, null=True)  #aprasymas
     price = models.IntegerField() # kad matyti centus
     created_at = models.DateTimeField(auto_now_add=True) # kada sukurtas, automatiskai sukuria irasa
+    image = models.ImageField(upload_to='uploads/', blank=True, null=True) #upload_to - img saving folder
+    thumbnail = models.ImageField(upload_to='uploads/', blank=True, null=True) #upload_to - img saving folder
     
     class Meta:
         ordering = ('-created_at',) #  kad matyti sukurimo data
@@ -33,3 +38,27 @@ class Product(models.Model):
     def get_display_price(self):
         return self.price / 100 # kad matyti kainas in $
     
+    
+    def get_thumbnail(self): #get the thumbnail or check if it exists
+        if self.thumbnail:
+            return self.thumbnail.url # type: ignore
+        else:
+            if self.image:
+                self.thumbnail = self.make_thumbnail(self.image)    # create thumbnail if it doesn't exist
+                self.save()
+                return self.thumbnail.url  # type: ignore
+            else: 
+                return'http://via.placeholder.com/240x240x.jpg'
+                
+                
+    def make_thumbnail(self, image, size=(300,300)):    #thumbnail maker
+        img = Image.open(image)     
+        img.convert('RGB')      # convert to RGB if needed
+        img.thumbnail(size)     # resize image to 300x300
+        
+        thumb_io = BytesIO()    # 
+        img.save(thumb_io, 'JPEG', quality=90)  # save the thumbnail
+       
+        thumbnail=File(thumb_io, name=image.name)   # create a django file object/ thumbnail
+        
+        return thumbnail
