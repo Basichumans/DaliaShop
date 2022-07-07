@@ -1,0 +1,46 @@
+{% extends "core/base.html"%}
+{%block tittle%}cart{%endblock%} 
+ {%block content%}
+<div class="max-w-6xl mx-auto flex-wrap item-start py-6 px-6 xl:px-0 mt-10">
+    <div class="product w-full lg:w-3/4">
+
+        <div class="product  w-full lg:w-3/4">
+            <div class="product mb-6 flex pr-6">
+                <a href="#" class="w-1/4">
+                    <img src="{{ product.image }}" alt="product" class="w-full hover: shadow-sm rounded-xl">
+                </a>
+                <div class="w-3/4 pl-6">
+                    <div class="flex justify-between">
+                        <a href="#" class="">product name</a>
+                        <span class="mb-6 pt-1 ">${{ product.price }}</span>
+                    </div>
+                    <hr>
+                    <div class="quantity mt-6 flex item-center space-x-4">
+                        <a href="#" class="p-3 bg-gray-50">-</a>
+                        <span>2</span>
+                        <a href="#" class="p-3 bg-gray-50">+</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-gray-50 w-full w-1/4 mt-10">
+        <h6 class="text-lg mb-5">
+            summary
+        </h6>
+        <div class="summary w-full w-1/4 mt-10 justify-between" >
+            <span>
+                total
+            </span>
+            <span>
+                sum
+            </span>
+            <a href="#" class="inline-block rounded-xl hover:bg-white  mt-10 ">sheckout</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+{%endblock%}

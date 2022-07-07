@@ -26,6 +26,9 @@ SECRET_KEY = 'django-insecure-)#203)e8f%7%q!8g25%3y$l^*^24-(bj+59=##^((xjofrjrmt
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'
 #sesion cookie
 SESSION_COCKIE = 86400 # this is how long the cart will be stored in the session and outomaticly deleted after 24 hours
 CART_SESSION_ID = 'cart' # this is the name of the session variable that will be used to store the cart to separate from the user session

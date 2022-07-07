@@ -13,22 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path
-
-#DaliaShop
-from django.conf.urls.static import static
 from django.conf import settings
-from core.views import frontpage, shop,signup,login
-from product.views import product
-from cart.views import add_to_cart 
+from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import path, include
+ 
+ 
 
 urlpatterns = [
-    path('', frontpage, name='frontpage'),
-    path('login/', login, name='login'),
-    path('singup/', signup, name='signup'),
-    path('shop/', shop, name='shop'),
-    path('shop/<slug:slug>/', product, name='product'), #<slug:slug> is the slug of the product to be loaded after clicking on the product / dinamic url
-    path ('add_to_cart/<int:product_id>/', add_to_cart, name='add_to_cart'), 
-    path('admin/', admin.site.urls),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('', include('core.urls')),    #core.urls is the file that contains the urls for the core app/ include is for redirecting to the core app urls
+    path('cart/', include('cart.urls')), #cart.urls is the file that contains the urls for the cart
+    path('admin/', admin.site.urls),    
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # type: ignore

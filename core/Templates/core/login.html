@@ -1,25 +1,48 @@
-{% extends "core/base.html"%} {%block content%}
-
-<div class="my-20 max-w-lg mx-auto flex flex-wrap py-6 px-6 xl:px-0 my-m">
-  <div class="w-full bg-gray-50  p-6 rounded-xl">
+{% extends "core/base.html"%}
+{%block tittle%}login{%endblock%} 
+ {%block content%}
+<div class="my-20 max-w-lg mx-auto flex  flex-wrap   border py-6 px-6 xl:px-0 my-m">
+  <div class="w-full  p-6 rounded-xl ">
     <h4 class="mb-6 text-gray-400  text-xl mx-1">Login</h4>
-    <form action="." method="past" class="space-y-3 ">
+    <form action="." method="post" class="space-y-3 ">
+      {% csrf_token %}
       <div>
-        <input type="email" name="email" class=" border-hidden w-full p-3 rounded-lg border border-gray-300" placeholder="E-mail"> 
+        <input type="text" name="username" class="border-1 w-full p-3  border border-gray-300" placeholder="username"> 
       </div>
         <div>
-            <input type="password" name="password" class="border-hidden  w-full p-3 rounded-lg border border-gray-300" placeholder="Password">
+            <input type="password" name="password" class="border-1  w-full p-3  border border-gray-300" placeholder="Password">
         </div>
-        <div class="p-6 bg-red-100 text-red-900 rounded-lg">
-            <p class="">
-                bad email or password
-            </p>
-        </div>
+        <!-- checks for errors  -->
+        {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="p-2 bg-red-100 text-red-800 ">
+                            <p>{{ error|escape }}</p>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+                {% for error in form.non_field_errors %}
+                    <div class="p-2 bg-red-100 text-red-800 ">
+                        <p>{{ error|escape }}</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
         <div class="">
-        <button type="submit" class="bg-white hover:bg-gray-100 text-gray  py-2 px-4  rounded-lg ">
-          Sign up
-        </div>
-    </form>
+        <button type="submit" class="bg-gray-50 hover:bg-gray-100 text-gray  py-2 px-4  w-full ">
+          log in
+        </div>  
+      </form>
+    </div>
   </div>
-</div>
+  <div class="flex flex-wrap justify-center align-middle mx-auto ">
+    <div>
+      <p>no account ? </p>
+    </div>
+    <div>
+
+      <a href="{% url 'signup' %}" class="hover:bg-gray-50 text-gray  py-2 px-4  rounded-l ">
+      singup </a>
+    </div>
+  </div>
 {%endblock%}
