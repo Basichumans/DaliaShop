@@ -21,7 +21,7 @@ from django.urls import path, include
  
 
 urlpatterns = [
-    path('', include('core.urls')),    #core.urls is the file that contains the urls for the core app/ include is for redirecting to the core app urls
-    path('cart/', include('cart.urls')), #cart.urls is the file that contains the urls for the cart
+    path('', include('core.urls')),                                  #core.urls is the file that contains the urls for the core app/ include is for redirecting to the core app urls
+    path('cart/', include('cart.urls')),                             #cart.urls is the file that contains the urls for the cart
     path('admin/', admin.site.urls),    
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # type: ignore
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)    #type: ignore
