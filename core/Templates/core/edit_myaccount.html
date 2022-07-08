@@ -3,12 +3,33 @@
 {%block content%}
 <!-- create accout page -->
 <div class="max-w-6xl mx-auto flex-wrap item-start py-6 px-6 xl:px-0 mt-10">
-    <h1 class='mb-6'>
+    <h1 class="mb-6 flex flex-wrap justify-center">
         Eddit account
     </h1>
-    <form action="" action="." class="space-y-3">
+    <form method="post" action="." class="space-y-3">
+        {%csrf_token%}
         <div >
-            <input type="text" name="first_name" id="first_name" class="border-2  border-gray-300 p-2 w-full focus:outline-none " value="{{request.user.first_name}}">
+            <label for="username" class="text-sm mb-2">
+                username
+            <input type="text" name="username"  class="border-2  border-gray-300 p-2 w-full focus:outline-none " value="{{request.user.username}}">
+        </div>
+        <div >
+            <label for="first_name" class="text-sm mb-2">
+                first name
+            <input type="text" name="first_name"  class="border-2  border-gray-300 p-2 w-full focus:outline-none " value="{{request.user.first_name}}">
+        </div>
+        <div >
+            <label for="last_name" class="text-sm mb-2">
+                last name
+            <input type="text" name="last_name"  class="border-2  border-gray-300 p-2 w-full focus:outline-none " value="{{request.user.last_name}}">
+        </div>
+        <div >
+            <label for="email" class="text-sm mb-2">
+                email
+            <input type="emil" name="email"  class="border-2  border-gray-300 p-2 w-full focus:outline-none " value="{{request.user.email}}">
+        </div>
+        <div>
+            <button type="submit" class="py-4 px-6 bg-gray-50 w-full">submint</button>
         </div>
     </form>
 {% endblock%}
