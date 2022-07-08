@@ -15,9 +15,12 @@ class Cart(object):
         self.cart = cart                                                #to use this object in the modules
         
     def __iter__(self):
-          for p in self.cart.keys():                                    #iterate through the cart , keys are id of the products
-              self.cart[str(p)]['product'] = Product.objects.get(pk=p)  #get the product from the database, str is used to convert the id to string, pk to get the id from the database
-    
+        for p in self.cart.keys():                                    #iterate through the cart , keys are id of the products
+            self.cart[str(p)]['product'] = Product.objects.get(pk=p)   #isignet to the item, get the product from the database, str is used to convert the id to string, pk to get the id from the database
+            
+        for item in self.cart.values():                                      #iterate through the cart, values are the items in the cart
+            item['total_price']= int(item['quantity'] * item['product'].price) /100  #get the total price of the product
+            yield item                                                      #yield the item
     
     def __len__(self):                                                  #get the length of the cart, how many items are in the cart
         return sum(item['quantity'] for item in self.cart.values())     #return the number of items in the cart
@@ -46,3 +49,9 @@ class Cart(object):
         if product_id in self.cart:                                      #if the product is in the self.art
             del self.cart[product_id]                                    #delete the product from the cart
             self.save()                                                  #save the cart
+            
+            
+    def get_tottal_cost(self):                                           #get the total cost of the cart
+        for p in self.cart.keys():                                      #iterate through the cart, keys are id of the products
+            self.cart[str(p)]['product'] = Product.objects.get(pk=p)
+        return int(sum(item['total_price'] for item in self.cart.values()))/100  #return the total cost of the cart

@@ -1,0 +1,67 @@
+{% extends "core/base.html"%}
+{%block tittle%}My account{%endblock%} 
+{%block content%}
+<!-- create accout page -->
+<div class="max-w-6xl mx-auto flex-wrap item-start py-6 px-6 xl:px-0 mt-10">
+    <h1 class="mb-12">
+        My account
+    </h1>
+    <!-- user info -->
+    <div class="mb-6 ">
+        <p class="mb-6 " >
+        Name: {{request.user.get_full_name}}
+         </p>
+        <p class="mb-6 ">
+        Last name: {{request.user.last_name}}
+         </p>
+        <p class="mb-6 ">
+        Email: {{request.user.email}} 
+         </p>
+         <a class="bg-gray-50 p-2" href="{% url 'edit_myaccount'%}">edit</a>
+    </div>
+
+         <hr>
+         <!-- orders title -->
+         <h2 class="mb-10">
+            My orders
+         </h2>
+            <!-- orders id -->
+         <div class="mb-6">
+            <div class="mb-6">
+                <a href="#">
+                   Order id : 1  
+                </a>
+            </div>
+            <!-- products orders -->
+            <div class="mb-10 w-full">
+                <div class="product mb-6 flex pr-6">
+                    <a href="" class="w-1/4">
+                        <img class="hover:shadow-l" src="KAx7H0jxo28.png" alt="">
+                    </a>
+                    <div class="w-3/4 pl-6">
+                        <div class="flex justify-between">
+                            <a href="" class="text-m">Product</a>
+                            <p class="mb-6 pt-1 ">
+                                99$
+                            </p>
+                        </div>
+                        <hr>
+                        <div class="product mb-6 flex pr-6">
+                            quantity 1
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+         <div>
+            <p class="mb-2">
+                date: 2020-01-01
+            </p>
+            <p class="mb-2">
+                tottal price: 99$
+            </p>
+         </div>
+    </div>
+</div>
+
+{%endblock%}

@@ -1,5 +1,6 @@
 
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import render,redirect
 from product.models import Product, Category
@@ -7,6 +8,18 @@ from .forms import SignUpForm
 
 
 # Create your views here.
+
+#my account method   (login required if for onli loged users to see this page)
+@login_required
+def my_account(request):
+    return render(request, 'core/myaccount.html')
+
+# my account method for information edditing
+@login_required
+def edit_my_account(request):
+    return render(request, 'core/edit_myaccount.html')
+
+#front page
 def frontpage(request): 
     products = Product.objects.all()[0:8]                                    #how many products to show on the frontpage
     
@@ -29,12 +42,7 @@ def signup(request):
     return render(request, 'core/signup.html', {'form': form})
 
 
-
-#login method
-def login_(request):
-    return render(request, 'core/login.html') 
-
-
+#shop method
 def  shop(request):
     categories = Category.objects.all() #get all categories
     products = Product.objects.all() #get all products

@@ -2,26 +2,26 @@
 {%block tittle%}checkout{%endblock%} 
 {%block content%}
 <div
-  class="p-6 max-w-6xl mx-auto flex flex-wrap items-start py-6 px-6 xl:px-0 mt-10"
+  class="p-6 max-w-6xl  mx-auto flex flex-wrap items-start py-6 px-6 xl:px-0 mt-10"
 >
   <div class="product w-full lg:w-3/4">
-    <h6 class="p-6 text-lg text-justify mb-5">checkout</h6>
     <div class="w-full pr-6">
-        <div class="mb-6 p-6 bg-gray-100 ">
-          <h5 class="mb-6">Shipping information</h5>
+      <div class="mb-6 p-6 bg-gray-100 ">
+          <h6 class=" text-lg text-justify  mb-5">Checkout</h6>
+          <h5 class="mb-6 mt-10">Shipping information</h5>
           <div class="flex space-x-2">
             <div class="w-1/2 mb-4">
                 <label class="inline-block mb-2">First name</label>
-                <input type="text" class="w-full p-5 ">
+                <input type="text" class="w-full p-5 " value="{{request.user.first_name}}">
                 </div>
                 <div class="w-1/2 mb-4">
                 <label class="inline-block mb-2">Last name</label>
-                <input type="text" class="w-full p-5 ">
+                <input type="text" class="w-full p-5 " value="{{request.user.first_name}}">
                 </div>
             </div>
             <div class="mb-4">
                 <label class="inline-block mb-2">Address</label>
-                <input type="text" class="w-full p-5 ">
+                <input type="text" class="w-full p-5 " >
           </div>
             <div class="flex space-x-2">
                 <div class="w-1/2 mb-4">
@@ -37,7 +37,7 @@
           <h5 class="mb-6">Contact information</h5>
           <div class="mb-4">
             <label class="inline-block mb-2">Email</label>
-            <input type="email" class="w-full p-5 ">          
+            <input type="email" class="w-full p-5 "value="{{request.user.email}}">          
           </div>
             <div class="mb-4">
                 <label class="inline-block mb-2">Phone</label>
@@ -53,7 +53,7 @@
 
         <div class="mb-6 flex justify-between">
             <span class="font-semibold">Total</span>
-            <span>$99</span>
+            <span>{{cart.tottal_price}}</span>
         </div>
         <a href="#" class="inline-block  p-2 py-4 rounded-xl  hover:bg-red-50 ">Confirm checkout</a>
     </div>

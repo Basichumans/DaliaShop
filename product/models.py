@@ -16,7 +16,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
     
-    
+#additionaly create multiple  photos for the product
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE) #on delete cascade is used to delete the category if the product is deleted
     name = models.CharField(max_length=255)
