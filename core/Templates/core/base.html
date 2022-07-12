@@ -28,8 +28,15 @@
                           </svg>
                         
                     </a>
-                    <!-- cart menu html from cart app  -->
-                  {% include 'cart/menu_cart.html' %}
+                    <!-- adding htmx for cart increment dicrement buttons -->
+                    <div>
+                        <!-- view function in cart/views.py -->
+                        hx-get="{%url 'hx_menu_cart'%}"
+                        hx-trigger = "update-menu-cart from:body"
+                        hx-swap ="innerHTML"
+                        <!-- cart menu html from cart app  -->
+                        {% include 'cart/menu_cart.html' %}
+                    </div>
                     </div>
             </div>
                 <div class="menu flex-1 flex justify-center text-sm  ">
