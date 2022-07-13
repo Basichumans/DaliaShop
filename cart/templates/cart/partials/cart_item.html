@@ -1,40 +1,40 @@
 
-<div class="product  w-full lg:w-3/4" id="#cart-item-{{ item.product.id }}" >
-    <div class="product mb-6 flex pr-6 " >
+{% if item %}
+    <div class="product mb-6 flex pr-6" id="cart-item-{{ item.product.id }}">
         <!-- to display image in cart we take  items > product > get_thumbnail fdr smaller warinat -->
-        <a href="{% url 'product' item.product.slug %}" class="w-1/4 mr-10">
-            <img src="{{ item.product.get_thumbnail }}" alt="product" class="w-full hover: shadow-sm rounded-sm ">
+        <a href="{% url 'product' item.product.slug %}" class="w-1/4">
+            <img class="hover:shadow-lg rounded-sm" src="{{ item.product.get_thumbnail }}">
         </a>
+
         <div class="w-3/4 pl-6">
             <div class="flex justify-between">
                 <!-- product is the property of the item -->
-                <a href="#" class="">{{item.product.name}}</a>
+                <a href="{% url 'product' item.product.slug %}" class="text-lg">{{ item.product.name }}</a>
                 <!-- tottal price (quantity *price) -->
-                <span class="mb-6 pt-1 ">${{ item.total_price }}</span>
+                <span class="mb-6 pt-1">${{ item.total_price }}</span>
             </div>
+
             <hr>
-            <!--  -->
-            <!-- <div class="quantity mt-6 flex item-center space-x-4">
-                <a  
-                    
-                    class="p-3 bg-gray-50"
-                    hx-get="{% url 'update_cart' item.product.id 'decrement'%}"
+
+            <div class="quantity mt-6 flex items-center space-x-4">
+                <a 
+                    class="p-3"
+                    hx-get="{% url 'update_cart' item.product.id 'decrement' %}"
                     hx-target="#cart-item-{{ item.product.id }}"
                     hx-swap="outerHTML"
                 >
                     -
                 </a>
-                
                 <span>{{ item.quantity }}</span>
                 <a 
-                    class="p-3 bg-gray-50"
+                    class="p-3"
                     hx-get="{% url 'update_cart' item.product.id 'increment' %}"
                     hx-target="#cart-item-{{ item.product.id }}"
                     hx-swap="outerHTML"
                 >
                     +
-                </a>                         
-            </div> -->
+                </a>
+            </div>
         </div>
     </div>
-</div>
+{% endif %}
