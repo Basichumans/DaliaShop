@@ -1,43 +1,38 @@
 {% extends "core/base.html"%}
 {%block tittle%}{%endblock%} 
 {%block content%}
-<header
-  class=" px-6 py-10 lg:py-20 bg-gray-50 flex-1 flex justify-center text-sm'"
->
-  <div class="z-1 max-w-3xl max-auto text-center h-full">
-    <!-- <p class="mb-2 text-3xl lg:tex-5xl text-white"> mbe video mbe nothing
+<header class="  flex items-center justify-center h-screen mb-12 overflow-hidden">
 
-        </p> -->
-    <a href="" class="">
-      <iframe
-      class="object-fill"
-        src="https://player.vimeo.com/video/366842543?h=3fd7e2bf28"
-        width="100%"
-        height="100%"
-        frameborder="0"
-        allow="autoplay; fullscreen; picture-in-picture"
-        allowfullscreen
-      ></iframe>
-      <p>
-        <a href="https://vimeo.com/366842543"></a
-        ><a href="https://vimeo.com/user99439694"></a>
-        <a href="https://vimeo.com"></a>
-      </p></a
-    >
-
-    <a
-      href="#"
-      class="inline-block m-20 px-6 w-py-3 rounded-xl bg-white text-black-800 hover:w-bg-primary-200"
-      >buy now</a
-    >
-  </div>
+  <video
+    autoplay
+    loop
+    muted
+    class="  w-auto min-w-full min-h-full "
+  >
+    <source
+      src="https://assets.mixkit.co/videos/preview/mixkit-making-a-leather-wallet-14949-large.mp4"
+      type="video/mp4"
+    />
+    Your browser does not support the video tag.
+  </video>
 </header>
+
 <!-- products from partial folder -->
 <div class=" m-20 py-2 px-6 xl:px-0">
-  <div class="products flex items-baseline flex-wrap ">
+  <div class="products flex items-baseline flex-wrap justify-center ">
     {% for product in products %}
     {%include "product/partials/product_list_item.html"%}
     {% endfor %}
   </div>
 </div>
 {%endblock%}
+
+<!-- 
+<iframe
+class="object-fill"
+  src="https://player.vimeo.com/video/366842543?h=3fd7e2bf28"
+  frameborder="0"
+  allow="autoplay; fullscreen; picture-in-picture"
+  allowfullscreen
+>
+</iframe> -->

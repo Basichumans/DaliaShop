@@ -18,7 +18,7 @@ def my_account(request):
 @login_required
 def edit_my_account(request):
     if request.method == 'POST' :                                             #gets the data from , post tag in the form
-        user = request.user                                                   #using iterables to update the data in the database
+        user = request.user                                                   #using user iterables to update the data in the database
         user.username = request.POST.get('username')
         user.first_name = request.POST.get('first_name')
         user.last_name = request.POST.get('last_name')

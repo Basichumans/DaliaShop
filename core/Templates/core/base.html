@@ -11,8 +11,8 @@
     <!-- nav  -->
     <!-- needs to fix dalia div -->
     
-<nav class = "z-3 border-b bg-white sticky top-0">
-    <div class="max-w-7xl flex mx-auto py-2 mt-8 px-1 xl:px-0 flex items-center justify-start  ">
+<nav class = "z-1 border-b bg-white sticky top-0 ">
+    <div class="max-w-7xl flex mx-auto py-2 mt-8 px-1 xl:px-0 flex items-center justify-start ">
                 <div class="menu flex-1 flex justify-center mr-auto ">
                     <a href= "/"  class = "py-1 text-gray-700 font-semibold text-4xl  "> DALI<a/>
                 </div>
@@ -28,18 +28,16 @@
                           </svg>
                         
                     </a>
-                    <!-- adding htmx for cart increment dicrement buttons -->
-                    <div>
-                        <!-- view function in cart/views.py -->
-                        hx-get="{%url 'hx_menu_cart'%}"
-                        hx-trigger = "update-menu-cart from:body"
-                        hx-swap ="innerHTML"
-                        <!-- cart menu html from cart app  -->
-                        {% include 'cart/menu_cart.html' %}
+                    <!-- cart menu html from cart app  -->
+                    <div
+                        hx-get="{% url 'hx_menu_cart' %}"
+                        hx-trigger="update-menu-cart from:body"
+                        hx-swap="innerHTML">
                     </div>
+                    {% include 'cart/menu_cart.html' %}
                     </div>
             </div>
-                <div class="menu flex-1 flex justify-center text-sm  ">
+                <div class="menu flex-1 flex justify-center text-sm mb-2  ">
                     <ul href= "#"  class = "py-1 text-gray-700  "> 
                     <div class = ' flex-1 flex justify-center mr-auto '>
                         <!-- ateina is shop.html  -->

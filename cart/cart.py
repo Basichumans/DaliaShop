@@ -36,7 +36,7 @@ class Cart(object):
             self.cart[product_id] = {'quantity': 1, 'id': product_id}   
             
             
-        if  update_quantity:                                             # increment od decrement the quantity in the cart
+        if  update_quantity:                                             # increment or decrement the quantity in the cart
             self.cart[product_id]['quantity'] += int(quantity)           #add the quantity to the cart
             
             if self.cart[product_id]['quantity'] == 0 :                  #if the quantity is 0 remoce the product from the cart
@@ -46,17 +46,20 @@ class Cart(object):
         
         
     def remove(self, product_id):                                        #remove a product from the cart
-        if product_id in self.cart:                                      #if the product is in the self.art
+        if product_id in self.cart:                                      #if the product is in the self.cart
             del self.cart[product_id]                                    #delete the product from the cart
             self.save()                                                  #save the cart
             
             
-    def get_tottal_cost(self):                                           #get the total cost of the cart
-        for p in self.cart.keys():                                      #iterate through the cart, keys are id of the products
-            self.cart[str(p)]['product'] = Product.objects.get(pk=p)
-        return int(sum(item['total_price'] for item in self.cart.values()))/100  #return the total cost of the cart
+    def get_tottal_cost(self):                                                      #get the total cost of the cart
+        for product in self.cart.keys():                                            #iterate through the cart, keys are id of the products
+            self.cart[str(product)]['product'] = Product.objects.get(pk=product)    #isignet to the item, get the product from the database, str is used to convert the id to string, pk to get the id from the database
+        return float(sum(item['product'].price *item['quantity'] for item in self.cart.values()))/100       #return the total cost of the cart
     
     
     #method for cart update in views.py
     def get_item(self, product_id):
         return self.cart[str(product_id)] 
+    
+    
+    

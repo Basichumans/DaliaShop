@@ -1,48 +1,31 @@
 {% extends "core/base.html"%}
 {%block tittle%}cart{%endblock%} 
- {%block content%}
+{%block content%}
 <div class="max-w-6xl mx-auto flex-wrap item-start py-6 px-6 xl:px-0 mt-10">
     <div class="product w-full lg:w-3/4">
         <!-- cart have quantity not products so we look for items -->
           {% for item in cart %}
-        <div class="product  w-full lg:w-3/4">
-            <div class="product mb-6 flex pr-6 ">
-                <!-- to display image in cart we take  items > product > get_thumbnail fdr smaller warinat -->
-                <a href="{% url 'product' item.product.slug %}" class="w-1/4 mr-10">
-                    <img src="{{ item.product.get_thumbnail }}" alt="product" class="w-full hover: shadow-sm rounded-xl ">
-                </a>
-                <div class="w-3/4 pl-6">
-                    <div class="flex justify-between">
-                        <!-- product is the property of the item -->
-                        <a href="#" class="">{{item.product.name}}</a>
-                        <!-- tottal price (quantity *price) -->
-                        <span class="mb-6 pt-1 ">${{ item.total_price }}</span>
-                    </div>
-                    <hr>
-                    <div class="quantity mt-6 flex item-center space-x-4">
-                        <a href="#" class="p-3 bg-gray-50">-</a>
-                        <span>{{item.quantity}}</span>
-                        <a href="#" class="p-3 bg-gray-50">+</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+          <!-- add cart html from partial folder -->
+          {%include "cart/partials/cart_item.html"%}
         {% endfor %}
     </div>
-    <div class="summary w-full w-1/4 p-6 bg-gray-100 rounded-xl mt-3">
+    <div class="summary w-full w-1/4 p-6  rounded-xl mt-3">
         <h2 class="uppercase text-lg mb-5">Summary</h2>
 
         <div class="mb-6 flex justify-between">
             <span class="font-semibold">Total</span>
-            <span>{{get_tottal_price}}</span>
+            <span  
+                    hx-get="{% url 'hx_cart_total' %}"
+                    hx-trigger="update-menu-cart from:body"
+                    hx-swap="innerHTML">
+              
+              {% include 'cart/partials/cart_total.html' %}
+          </span>
         </div>
+        
         <a href="{%url 'checkout'%}" class="inline-block bg-white w-full align-middle py-4 rounded-xl  hover:bg-red-50 ">checkout</a>
     </div>
   </div>
 </div>
 </div>
-
-
-
-
 {%endblock%}
