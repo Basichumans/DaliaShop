@@ -60,7 +60,7 @@ def update_cart(request,product_id, action):                        #method for 
             'quantity':quantity,
             }
     #return the item object 
-    response  = render(request, 'cart/cart_item.html', {'item':item}) 
+    response  = render(request, 'cart/partials/cart_item.html', {'item':item}) 
     response ['HX-Trigger'] = 'update-menu-cart'                #this trigger is for htmx to update the cart
     return response
 
