@@ -6,25 +6,6 @@ from cart.cart import Cart
 # Check if order is goin though, after click
 def create_order(request):
     cart = Cart(request)
-    tottal_price = 0 
-    items=[]
-    for item in cart:
-        product= item['product']
-        tottal_price += product.price * int(item['quantity'])
-        obj = {
-            'price_data':{
-                'curency':'USD',
-                'product_data':{
-                    'name':product.name,
-                },
-                'unit_amount':product.price,
-            },
-            'quantity':item['quantity'],
-        }
-        items.append(obj)
- 
-    
-    
     
     if request.method =='POST':
         #get the data from the form
@@ -47,3 +28,4 @@ def create_order(request):
 
         return redirect('myaccount')               #redirect to myaccount page  from core template
     return redirect('cart')                        # if not post request, redirect to cart 
+
