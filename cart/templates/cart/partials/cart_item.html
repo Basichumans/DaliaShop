@@ -1,4 +1,4 @@
-
+<!-- for view update cart method to check if item exists  -->
 {% if item %}
     <div class="product mb-6 flex pr-6" id="cart-item-{{ item.product.id }}">
         <!-- to display image in cart we take  items > product > get_thumbnail fdr smaller warinat -->
@@ -18,7 +18,7 @@
 
             <div class="quantity mt-6 flex items-center space-x-4">
                 <a 
-                    class="p-3"
+                    class="p-3  bg-red-100 rounded-full hover: cursor-pointer "
                     hx-get="{% url 'update_cart' item.product.id 'decrement' %}"
                     hx-target="#cart-item-{{ item.product.id }}"
                     hx-swap="outerHTML"
@@ -26,14 +26,14 @@
                     -
                 </a>
                 <span>{{ item.quantity }}</span>
-                <a 
+                <!-- <a 
                     class="p-3"
                     hx-get="{% url 'update_cart' item.product.id 'increment' %}"
                     hx-target="#cart-item-{{ item.product.id }}"
                     hx-swap="outerHTML"
                 >
                     +
-                </a>
+                </a> -->
             </div>
         </div>
     </div>

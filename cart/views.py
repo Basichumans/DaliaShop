@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from product.models import Product
-from .cart import Cart
+from cart.cart import Cart
 
 
 
@@ -46,19 +46,25 @@ def update_cart(request,product_id, action):                        #method for 
     
     #for htmx get the product from data base    
     product = Product.objects.get(pk=product_id)
-    quantity = cart.get_item(product_id)['quantity']                #get the quantity because get_item returns a dictionary
+    quantity = cart.get_item(product_id)                #get the quantity because get_item returns a dictionary
     
-    #dictionary for item to return to the cart
-    item = { 'product':{    
-                            'id':product.id,
-                            'name':product.name,
-                            'image':product.image,
-                            'get_thumbnail':product.get_thumbnail(),
-                            'price':product.price,
-    },
-            'total_price':(quantity * product.price)/100,
-            'quantity':quantity,
-            }
+    if quantity:
+        quantity = quantity['quantity']
+    
+        #dictionary for item to return to the cart
+        item = { 'product':{    
+                                'id':product.id,
+                                'name':product.name,
+                                'image':product.image,
+                                'get_thumbnail':product.get_thumbnail(),
+                                'price':product.price,
+        },
+                'total_price':(quantity * product.price)/100,
+                'quantity':quantity,
+                }
+    else:
+        item= None
+        
     #return the item object 
     response  = render(request, 'cart/partials/cart_item.html', {'item':item}) 
     response ['HX-Trigger'] = 'update-menu-cart'                #this trigger is for htmx to update the cart

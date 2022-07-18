@@ -8,6 +8,7 @@ class SignUpForm(UserCreationForm):
     last_name=forms.CharField(max_length=55, required=True)
     email = forms.EmailField(max_length=254, required=True)
     
+    
     #override the default UserCreationForm
     class Meta:
         model = User

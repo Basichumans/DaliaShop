@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User 
 from product.models import Product 
 
-
 # Create your models here.
 # Model for buyer
 '''
@@ -35,6 +34,8 @@ class Order(models.Model):
     #status to 
     status = models.CharField(max_length=256, choices=STATUS_CHOICES,  default='ORDERED')
 
+    
+   
 
 # Model for order item 
 class OrderItem(models.Model):
@@ -42,4 +43,11 @@ class OrderItem(models.Model):
     product = models.ForeignKey(Product, related_name='items', on_delete=models.CASCADE,null=True)
     price = models.IntegerField()
     quantity = models.IntegerField(default=1)
-     
+    
+    
+    def get_display_price(self):
+        return self.price / 100 
+   
+    def get_tottal_cost(self):                                                    
+        for item in self.order.items.all():
+            return item.price

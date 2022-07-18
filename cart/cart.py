@@ -13,21 +13,25 @@ class Cart(object):
         
         
         self.cart = cart                                                #to use this object in the modules
+     
         
     def __iter__(self):
-        for p in self.cart.keys():                                    #iterate through the cart , keys are id of the products
+        for p in self.cart.keys():                                     #iterate through the cart , keys are id of the products
             self.cart[str(p)]['product'] = Product.objects.get(pk=p)   #isignet to the item, get the product from the database, str is used to convert the id to string, pk to get the id from the database
             
-        for item in self.cart.values():                                      #iterate through the cart, values are the items in the cart
+        for item in self.cart.values():                                              #iterate through the cart, values are the items in the cart
             item['total_price']= int(item['quantity'] * item['product'].price) /100  #get the total price of the product
-            yield item                                                      #yield the item
+            yield item                                                               #yield the item
+    
     
     def __len__(self):                                                  #get the length of the cart, how many items are in the cart
         return sum(item['quantity'] for item in self.cart.values())     #return the number of items in the cart
     
+    
     def save(self):                                                     #save the cart to the session,notify the server that smthg has changed
         self.session[settings.CART_SESSION_ID] = self.cart              #save the cart in the session
         self.session.modified = True                                    # sesion have been updated
+      
         
     def add(self, product_id, quantity=1, update_quantity=False):        #add a product to the cart, update the quantity to update the cart
         product_id = str(product_id)                                     #convert the id to string to easear get it from self.cart
@@ -59,7 +63,10 @@ class Cart(object):
     
     #method for cart update in views.py
     def get_item(self, product_id):
-        return self.cart[str(product_id)] 
+        if str(product_id) in self.cart:
+            return self.cart[str(product_id)]
+        else:
+            return None
     
     
     

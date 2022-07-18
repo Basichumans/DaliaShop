@@ -8,6 +8,3 @@ def cart(request):
     return {'cart': cart}   #pass the cart to the template
 
 
-
-# def cart(request):
-#     return {'cart': Cart(request)}
